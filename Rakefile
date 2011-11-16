@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "toe-core"
   gem.homepage = "http://github.com/pmenke/toe-core"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Ruby implementation of the ToE (time-oriented events) data model}
+  gem.description = %Q{This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.}
   gem.email = "pmenke@googlemail.com"
   gem.authors = ["Peter Menke"]
   # dependencies defined in Gemfile
