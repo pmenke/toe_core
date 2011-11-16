@@ -6,6 +6,7 @@ rdoc
 
 # yard generated
 doc
+ydoc
 .yardoc
 
 # bundler
@@ -52,4 +53,3 @@ pkg
 *.tmp
 Gemfile.lock
 .project
-
