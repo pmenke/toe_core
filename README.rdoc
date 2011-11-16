@@ -1,6 +1,7 @@
 = toe-core
 
-Description goes here.
+This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.
+
 
 == Contributing to toe-core
  
