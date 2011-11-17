@@ -103,7 +103,12 @@ module ToE
         @role
       end
       
-            
+      # return the scale elements, if possible (that is, if it is a finite set).
+      def elements
+        unless continuous?
+          
+        end
+      end
     end
   end
 end
