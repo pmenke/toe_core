@@ -2,4 +2,7 @@
 # to be (de)serialized between XML (or other formats) and ToE.
 class ToE::Model::BasicToEObject
   
+  attr_accessor :id, :name
+  
+  
 end

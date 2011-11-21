@@ -53,3 +53,4 @@ pkg
 *.tmp
 Gemfile.lock
 .project
+/nbproject/private/

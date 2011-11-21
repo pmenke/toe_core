@@ -1,5 +1,5 @@
 # class Scale
-class ToE::Model::Scale < BasicToEObject
+class ToE::Model::Scale < ToE::Model::BasicToEObject
 
   @@MODES = [:Nominal, :Ordinal, :OrdinalCyclic, :Cardinal, :CardinalCyclic, :Ratio]
   

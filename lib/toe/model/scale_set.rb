@@ -1,8 +1,12 @@
 # represents the collection of scales that are contained
 # in a toe document.
-class ToE::Model::ScaleSet < BasicToEObject
+class ToE::Model::ScaleSet < ToE::Model::BasicToEObject
   
   attr_accessor :scales
+  
+  def initialize
+    @scales = Array.new
+  end
   
   # this is an instance method. doc this!
   # @author Peter Menke

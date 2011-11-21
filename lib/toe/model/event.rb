@@ -2,7 +2,7 @@
 # The Event class is the central data element in a ToE document.
 # It links data chunks to specific points or intervals on one or
 # more scales.
-class ToE::Model::Event < BasicToEObject
+class ToE::Model::Event < ToE::Model::BasicToEObject
   
   # data object that can hold different object structures
   # @returns [Data] data object of this event
@@ -14,7 +14,7 @@ class ToE::Model::Event < BasicToEObject
   
   # container for links
   # @returns [Array] data object of this event
-  attr_reader :links
+  attr_reader :link_list
   
   
   public
@@ -40,8 +40,13 @@ class ToE::Model::Event < BasicToEObject
   end
 
   # replace the existing link array with new one
-  def links(new_links)
+  def link_list=(new_links)
     @links = val
   end
+  
+  def add_link(new_link)
+    @links << new_link unless @links.include? new_link
+  end
+  
   
 end
