@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<EventDocument xmlns="http://www.sfb673.org/ToE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="eventdocument1" xsi:noNamespaceSchemaLocation="http://elphaba.coli.uni-bielefeld.de/xml/schema/toe.xsd">
+  <Head id="head2"/>
+  <ScaleSet id="scaleset3">
+    <Scale continuous="true" id="timeline" mode="ratio" unit="ms"/>
+    <Scale continuous="true" id="spacex" mode="ratio" unit="px"/>
+    <Scale continuous="true" id="spacey" mode="ratio" unit="px"/>
+    <Scale continuous="false" id="objects" mode="nominal" unit=""/>
+    <Scale continuous="false" id="ratings" mode="ordinal" unit=""/>
+  </ScaleSet>
+  <ReferencedObjectList id="referencedobjectlist6"/>
+  <AgentList id="agentlist4"/>
+  <LayerStructure id="layerstructure5">
+    <Layer contentStructure="sequence" dataType="String" id="layer13" name="PersonA-Words"/>
+    <Layer contentStructure="tree" dataType="unrestricted" id="layer14" name="PersonA-Phonemes"/>
+    <LayerConnector cardinality="unrestricted" id="layerconnector15" order="0" role="" source="layer13" target="layer14"/>
+  </LayerStructure>
+  <EventSet id="eventset7">
+    <Event id="event16">
+      <LinkList>
+        <IntervalLink id="intervallink19" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink20" target="layer13"/>
+      </LinkList>
+      <Data id="data17">
+        <String>all</String>
+      </Data>
+      <NoteList id="notelist18"/>
+    </Event>
+    <Event id="event21">
+      <LinkList>
+        <IntervalLink id="intervallink24" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink25" target="layer13"/>
+      </LinkList>
+      <Data id="data22">
+        <String>work</String>
+      </Data>
+      <NoteList id="notelist23"/>
+    </Event>
+    <Event id="event26">
+      <LinkList>
+        <IntervalLink id="intervallink29" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink30" target="layer13"/>
+      </LinkList>
+      <Data id="data27">
+        <String>and</String>
+      </Data>
+      <NoteList id="notelist28"/>
+    </Event>
+    <Event id="event31">
+      <LinkList>
+        <IntervalLink id="intervallink34" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink35" target="layer13"/>
+      </LinkList>
+      <Data id="data32">
+        <String>no</String>
+      </Data>
+      <NoteList id="notelist33"/>
+    </Event>
+    <Event id="event36">
+      <LinkList>
+        <IntervalLink id="intervallink39" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink40" target="layer13"/>
+      </LinkList>
+      <Data id="data37">
+        <String>play</String>
+      </Data>
+      <NoteList id="notelist38"/>
+    </Event>
+    <Event id="event41">
+      <LinkList>
+        <IntervalLink id="intervallink44" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink45" target="layer13"/>
+      </LinkList>
+      <Data id="data42">
+        <String>makes</String>
+      </Data>
+      <NoteList id="notelist43"/>
+    </Event>
+    <Event id="event46">
+      <LinkList>
+        <IntervalLink id="intervallink49" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink50" target="layer13"/>
+      </LinkList>
+      <Data id="data47">
+        <String>jack</String>
+      </Data>
+      <NoteList id="notelist48"/>
+    </Event>
+    <Event id="event51">
+      <LinkList>
+        <IntervalLink id="intervallink54" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink55" target="layer13"/>
+      </LinkList>
+      <Data id="data52">
+        <String>a</String>
+      </Data>
+      <NoteList id="notelist53"/>
+    </Event>
+    <Event id="event56">
+      <LinkList>
+        <IntervalLink id="intervallink59" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink60" target="layer13"/>
+      </LinkList>
+      <Data id="data57">
+        <String>dull</String>
+      </Data>
+      <NoteList id="notelist58"/>
+    </Event>
+    <Event id="event61">
+      <LinkList>
+        <IntervalLink id="intervallink64" maxInclusive="false" maxType="reference" minInclusive="false" minType="reference" target="timeline"/>
+        <LayerLink id="layerlink65" target="layer13"/>
+      </LinkList>
+      <Data id="data62">
+        <String>boy</String>
+      </Data>
+      <NoteList id="notelist63"/>
+    </Event>
+  </EventSet>
+</EventDocument>

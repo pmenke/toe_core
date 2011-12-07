@@ -28,6 +28,9 @@ class ToE::Porter::ToEPorter
   
     def self.read_xml(root)
       
+      id = root.attributes["id"]
+      
+      
       root.each_element do |x|
         
         puts "    -- #{x.name}"
@@ -86,6 +89,17 @@ class ToE::Porter::ToEPorter
       
       #puts edoc.scale_set.inspect
       
+      @event_set.each_element do |el|
+        if el.name == "Event"
+          ev = Event.new
+          edoc.event_set.add ev
+          
+          # @todo add links to object
+          # LayerLinks, ScaleLinks EventLinks
+          
+        end
+      end
+      
       return edoc
     end
     
@@ -97,7 +111,7 @@ class ToE::Porter::ToEPorter
       end
     end
   
-    # @todo do some actual work here!
+    # This is just a placeholder method.
     def process_data(element)
       if element.element?
         if element.name == "String"

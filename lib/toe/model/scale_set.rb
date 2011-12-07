@@ -8,9 +8,9 @@ class ToE::Model::ScaleSet < ToE::Model::BasicToEObject
     @scales = Array.new
   end
   
-  # this is an instance method. doc this!
+  # check whether a scale is already contained in the scale set
   # @author Peter Menke
-  #@return boolean 
+  #@return boolean true iff the given scale is already contained.
   def include?(scale)
     @scales.include?(scale)
   end

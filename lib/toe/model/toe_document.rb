@@ -12,17 +12,16 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
   
     @head = Head.new
     @scale_set = ScaleSet.new
-    @agent_list = Hash.new #@todo
-    @layer_structure = Hash.new #@todo
-    @event_set = Hash.new #@todo
-    
-    # TODO other new objects
+    @agent_list = Hash.new #@todo create actual AgentList class
+    @layer_structure = Hash.new #@todo create actual LayerStructure class
+    @event_set = EventSet.new
+
   end
   
   
   def describe
-    puts "ToEDocument"
-    puts "  #{scale_set.size} scales"
-    puts "  #{event_set.size} events"
+    puts "** ToEDocument"
+    puts "**   #{scale_set.size} scales"
+    puts "**   #{event_set.size} events"
   end
 end
