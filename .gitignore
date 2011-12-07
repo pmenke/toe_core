@@ -40,3 +40,4 @@ pkg
 Gemfile.lock
 .project
 /*.directory
+/nbproject/private/
