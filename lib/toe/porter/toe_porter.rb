@@ -9,31 +9,42 @@ class ToE::Porter::ToEPorter
   
   public
   
+    # needs a mapping between xml ids and already created objects
+    
+  
     def initialize
       
+      # stores mapping between xml ids and created objects
+      @ids_to_objects = Hash.new
       
+      # stores mapping between created objects and xml ids
+      @objects_to_ids = Hash.new
       
     end
+    
+    def store_id_and_object(id, object)
+      @ids_to_objects[id] = object
+      @objects_to_ids[object] = id
+    end
+    
   
     def self.read(input_file)
       parser = ::LibXML::XML::Parser.file(input_file)
       document = parser.parse
       porter = self.new
-      return self.read_xml(document.root)
+      return porter.read_xml(document.root)
     end
 
     def self.write(output_file)
 
     end
   
-    def self.read_xml(root)
+    def read_xml(root)
       
       id = root.attributes["id"]
       
       
       root.each_element do |x|
-        
-        puts "    -- #{x.name}"
         
         case x.name
         when "Head"
@@ -52,13 +63,12 @@ class ToE::Porter::ToEPorter
         
       end
       
-      puts @head.name
-      puts @scale_set.name
-      puts @referenced_object_list.name
-      puts @agent_list.name
-      puts @layer_structure.name
-      puts @event_set.name
-      
+      #puts @head.name
+      #puts @scale_set.name
+      #puts @referenced_object_list.name
+      #puts @agent_list.name
+      #puts @layer_structure.name
+      #puts @event_set.name
       
       edoc = ToEDocument.new
       
@@ -96,6 +106,28 @@ class ToE::Porter::ToEPorter
           
           # @todo add links to object
           # LayerLinks, ScaleLinks EventLinks
+          
+          el.each_element do |subel|
+            if subel.name == "LinkList"
+              subel.each_element do |link_el|
+                if link_el.name == "LayerLink"
+                  puts "    Layer"
+                  l = LayerLink.new
+                  l.target = link_el.attributes["target"]
+                  ev.links << l
+                end
+                if link_el.name == "EventLink"
+                  puts "    Event"
+                end
+                if link_el.name == "PointLink"
+                  puts "    Point"
+                end
+                if link_el.name == "IntervalLink"
+                  puts "    Interval"
+                end
+              end
+            end
+          end
           
         end
       end

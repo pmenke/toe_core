@@ -23,5 +23,12 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
     puts "** ToEDocument"
     puts "**   #{scale_set.size} scales"
     puts "**   #{event_set.size} events"
+    event_set.events.each do |event|
+      puts "**    event #{event.inspect}"
+      event.links.each do |link|
+        puts "**      link #{link.inspect}"
+      end
+    end
   end
+  
 end
