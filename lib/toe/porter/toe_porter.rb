@@ -73,16 +73,27 @@ class ToE::Porter::ToEPorter
       edoc = ToEDocument.new
       
       # 1. parse head
-       puts @head
-       puts @head.class.name
-       @head.each_element do |e|
+      @head.each_element do |e|
          if e.name == "Feature"
+           # import feature
            f = Feature.new
-           adopt e, f, %w{key type}
-           puts "  & Feature #{f}"
-           e.each_element do |child|
-             process_data child
+           adopt e, f, %w{id key type}
+           data_element = e.find_first("child::*")
+
+           # import values.
+           case data_element.name
+             when "String"
+               f.value = data_element.content
+             when "List"
+               f.value = data_element.find("child::*").collect{|x| x.content}
+             when "Map"
+               h = Hash.new
+               data_element.find("child::*").each do |c|
+                 h[c.attributes["key"]] = c.content
+               end
+               f.value = h
            end
+           edoc.head << f
          end
        end
       
@@ -90,11 +101,21 @@ class ToE::Porter::ToEPorter
       
       @scale_set.each_element do |e|
         if e.name == "Scale"
-          puts "  & Scale #{e.attributes.to_a}"
           scale = Scale.new
-          adopt(e, scale, ["mode", "unit"])
+          adopt(e, scale, ["id", "name", "mode", "unit"])
+          if e.attributes["continuous"]=="true"
+            scale.continuous = true
+          else
+            scale.continuous = false
+          end
           edoc.scale_set << scale
         end
+      end
+      
+      # 4. parse layer stuff
+      
+      @layer_structure.find("Layer").each do |layer|
+        puts "Layer: #{layer}"
       end
       
       #puts edoc.scale_set.inspect
@@ -111,19 +132,19 @@ class ToE::Porter::ToEPorter
             if subel.name == "LinkList"
               subel.each_element do |link_el|
                 if link_el.name == "LayerLink"
-                  puts "    Layer"
+                  #puts "    link to Layer"
                   l = LayerLink.new
                   l.target = link_el.attributes["target"]
                   ev.links << l
                 end
                 if link_el.name == "EventLink"
-                  puts "    Event"
+                  #puts "    link to Event"
                 end
                 if link_el.name == "PointLink"
-                  puts "    Point"
+                  #puts "    link to Point"
                 end
                 if link_el.name == "IntervalLink"
-                  puts "    Interval"
+                  #puts "    link to Interval"
                 end
               end
             end
@@ -137,7 +158,7 @@ class ToE::Porter::ToEPorter
     
     private 
     
-    def self.adopt(xml_node, target_object, attribute_names)
+    def adopt(xml_node, target_object, attribute_names)
       attribute_names.each do |name|
         target_object.send("#{name}=", xml_node.attributes[name])
       end

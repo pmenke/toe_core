@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <EventDocument xmlns="http://www.sfb673.org/ToE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="eventdocument1" xsi:noNamespaceSchemaLocation="http://elphaba.coli.uni-bielefeld.de/xml/schema/toe.xsd">
-  <Head id="head2"/>
+  <Head id="head2">
+    <Feature id="feature1" key="SomeFeature" type="SomeFeatureType">
+      <String>Value</String>
+    </Feature>
+    <Feature id="feature2" key="OtherFeature" type="SomeFeatureType">
+      <List>
+        <String>Value</String>
+      </List>
+    </Feature>
+    <Feature id="feature3" key="YetAnotherFeature" type="SomeFeatureType">
+      <Map>
+        <String key="key">Value</String>
+      </Map>
+    </Feature>    
+  </Head>
   <ScaleSet id="scaleset3">
     <Scale continuous="true" id="timeline" mode="ratio" unit="ms"/>
     <Scale continuous="true" id="spacex" mode="ratio" unit="px"/>

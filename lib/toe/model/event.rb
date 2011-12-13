@@ -21,11 +21,11 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
   
   # create a new, empty and unlinked Event object.
   def initialize
-    puts "Hello World"
+    #puts "Hello World"
     @data=nil
     @event_set=nil
     @links=Array.new
-    puts "  Links: #{links}"
+    #puts "  Links: #{links}"
   end
   
   # set a new data object for this event

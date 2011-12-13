@@ -111,4 +111,9 @@ class ToE::Model::Scale < ToE::Model::BasicToEObject
       
     end
   end
+  
+  def inspect
+    "Scale(##{id} #{mode}, #{dimension}, #{unit})"
+  end
+  
 end

@@ -11,4 +11,12 @@ class ToE::Model::Head < ToE::Model::BasicToEObject
   
   # TODO helper methods to get features by type, by key, etc.
   
+  def <<(feature)
+    @features << feature
+  end
+  
+  def size
+    @features.size
+  end
+  
 end

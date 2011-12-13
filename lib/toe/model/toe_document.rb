@@ -13,22 +13,43 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
     @head = Head.new
     @scale_set = ScaleSet.new
     @agent_list = Hash.new #@todo create actual AgentList class
-    @layer_structure = Hash.new #@todo create actual LayerStructure class
+    @layer_structure = LayerStructure.new
     @event_set = EventSet.new
 
   end
   
   
   def describe
-    puts "** ToEDocument"
-    puts "**   #{scale_set.size} scales"
-    puts "**   #{event_set.size} events"
+    result = ""
+    result << iline(0, "ToEDocument")
+    result << iline(2, "#{head.size} features in head")
+    head.features.each do |feature|
+      result << iline(4, "feature #{feature.inspect}")
+    end
+    result << iline(2, "#{scale_set.size} scales")
+    scale_set.scales.each do |scale|
+      result << iline(4, "scale #{scale.inspect}")
+    end
+    result << iline(2, "#{layer_structure.size} layers")
+    layer_structure.layers.each do |layer|
+      result << iline(4, "layer #{layer.inspect}")
+    end
+    result << iline(2, "#{event_set.size} events")
     event_set.events.each do |event|
-      puts "**    event #{event.inspect}"
+      result << iline(4, "event #{event}")
       event.links.each do |link|
-        puts "**      link #{link.inspect}"
+        result << iline(4, "link #{link}")
       end
     end
+    result
+  end
+  
+  def iline(indent, line)
+    return "**#{indent(indent)}#{line}\n"
+  end
+  
+  def indent(num=0)
+    return "  "*num
   end
   
 end

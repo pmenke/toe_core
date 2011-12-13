@@ -13,4 +13,8 @@ class ToE::Model::Feature < ToE::Model::BasicToEObject
     return @key.nil?
   end
   
+  def inspect
+    return "Feature #{type} ##{key} : #{value}"
+  end
+  
 end

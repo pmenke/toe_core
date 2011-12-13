@@ -23,7 +23,7 @@ class TestToEPorter < Test::Unit::TestCase
   def test_document_elements_present
     assert_not_equal(0, @testdocument.scale_set.size)
     assert_nothing_raised do
-      @testdocument.describe
+      puts @testdocument.describe
     end
   end
   
@@ -36,4 +36,45 @@ class TestToEPorter < Test::Unit::TestCase
     end
   end
 
+
+  def test_feature_fields_complete
+    # todo test if all fields of a feature are there
+    feature = @testdocument.head.features[0]
+    assert feature
+    assert feature.type
+    assert feature.key
+    assert feature.value
+  end
+  
+  def test_scale_fields_complete
+    scale = @testdocument.scale_set.first
+    assert scale
+    %w{id unit mode continuous?}.each do |field|
+      puts "<<#{field}>>"
+      assert scale.send(field)
+    end
+  end
+  
+  def test_layer_structure_complete
+    struc = @testdocument.layer_structure
+    assert struc
+    
+    # layer structure has no further attributes
+    # assert non-negative number of layers:
+    # 1. there is a size value
+    # 2. size value is equal to its abs field => positive
+    
+    layers = struc.layers
+    # layers should respond to size method
+    assert_respond_to layers, :size
+    
+    #layer size should be greater or equal 0
+    assert layers.size>=0, "number of layers is #{layers.size}, that's not positive."
+    
+    #@todo assert that a selected layer has all attributes
+    layer = @testdocument.layer_structure.layers.first
+    #assert layer
+    
+  end
+  
 end

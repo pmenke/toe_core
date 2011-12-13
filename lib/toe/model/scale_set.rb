@@ -41,4 +41,8 @@ class ToE::Model::ScaleSet < ToE::Model::BasicToEObject
     return @scales[index]
   end
   
+  def first
+    return @scales.first
+  end
+    
 end
