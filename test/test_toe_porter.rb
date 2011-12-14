@@ -36,7 +36,8 @@ class TestToEPorter < Test::Unit::TestCase
     end
   end
 
-
+  # check if the first feature responds to all accessors
+  # and returns reasonable values.
   def test_feature_fields_complete
     # todo test if all fields of a feature are there
     feature = @testdocument.head.features[0]
