@@ -1,10 +1,10 @@
-class ToE::Model::LayerLink < ToE::Model::Link
+class ToE::Model::EventLink < ToE::Model::Link
   
   def initialize
     super
   end
   
-  def layer
+  def event
     target
   end
   

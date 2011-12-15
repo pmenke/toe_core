@@ -1,6 +1,8 @@
 # class Scale
 class ToE::Model::Scale < ToE::Model::BasicToEObject
 
+  include BelongsToEventDocument
+  
   @@MODES = [:Nominal, :Ordinal, :OrdinalCyclic, :Cardinal, :CardinalCyclic, :Ratio]
   
   public

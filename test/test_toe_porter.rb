@@ -9,25 +9,45 @@ require 'benchmark'
 class TestToEPorter < Test::Unit::TestCase
 
   def setup
-    @testdocument = ToE::Porter::ToEPorter.read(File.dirname(__FILE__) + "/assets/CompleteToeDocument.toe")    
+    @porter = ToE::Porter::ToEPorter.instance
+    @testdocument = ToE::Porter::ToEPorter.read(File.dirname(__FILE__) + "/assets/CompleteToeDocument.toe", @porter)    
   end
   
-  def test_toe_porter_read_test_document
-    assert_true(@testdocument.is_a? ToE::Model::ToEDocument )
-  end
-
-  def test_read_document_name
-    assert("eventdocument1", @testdocument.id)
+  
+  # assure that import runs in one second or less.
+  def test_0000_general_benchmark
+    t = Benchmark.realtime{ 64.times { setup } }
+    puts "Benchmark: one run in about #{(t*1000.0/64.0)} milliseconds."
+    assert 1.0 > t
   end
   
-  def test_document_elements_present
-    assert_not_equal(0, @testdocument.scale_set.size)
+  def test_0001_list_storage
     assert_nothing_raised do
-      puts @testdocument.describe
+      puts "Storage Size: #{@porter.storage_size}"
+      puts @porter.list_storage
     end
   end
   
-  def test_event_links_working
+  def test_1010_toe_porter_read_test_document
+    assert_true(@testdocument.is_a? ToE::Model::ToEDocument )
+  end
+
+  def test_1020_read_document_name
+    assert("eventdocument1", @testdocument.id)
+  end
+  
+  def test_1030_store_resolving
+    assert_equal("eventdocument1", @porter.resolve(@testdocument))
+  end
+  
+  def test_1040_document_elements_present
+    assert_not_equal(0, @testdocument.scale_set.size)
+    #assert_nothing_raised do
+      puts @testdocument.describe
+    #end
+  end
+  
+  def test_1050_event_links_working
     assert_nothing_raised do
       @testdocument.event_set
       @testdocument.event_set.events
@@ -36,9 +56,9 @@ class TestToEPorter < Test::Unit::TestCase
     end
   end
 
-  # check if the first feature responds to all accessors
+  # check if the first feature of the sample document responds to all accessors
   # and returns reasonable values.
-  def test_feature_fields_complete
+  def test_1100_feature_fields_complete
     # todo test if all fields of a feature are there
     feature = @testdocument.head.features[0]
     assert feature
@@ -47,7 +67,9 @@ class TestToEPorter < Test::Unit::TestCase
     assert feature.value
   end
   
-  def test_scale_fields_complete
+  # check if the first scale of the sample document responds to all accessors
+  # and returns reasonable values
+  def test_1200_scale_fields_complete
     scale = @testdocument.scale_set.first
     assert scale
     %w{id unit mode continuous?}.each do |field|
@@ -56,7 +78,9 @@ class TestToEPorter < Test::Unit::TestCase
     end
   end
   
-  def test_layer_structure_complete
+  # check if the layer structure of the sample document responds to all accessors
+  # and returns reasonable values
+  def test_1300_layer_structure_complete
     struc = @testdocument.layer_structure
     assert struc
     
@@ -65,17 +89,39 @@ class TestToEPorter < Test::Unit::TestCase
     # 1. there is a size value
     # 2. size value is equal to its abs field => positive
     
+    # get variable with layer collection for convenience
     layers = struc.layers
+    # check whether this variable contains an object
+    assert layers, "layers collection could not be retrieved from document."
+    
     # layers should respond to size method
     assert_respond_to layers, :size
     
     #layer size should be greater or equal 0
     assert layers.size>=0, "number of layers is #{layers.size}, that's not positive."
     
-    #@todo assert that a selected layer has all attributes
-    layer = @testdocument.layer_structure.layers.first
-    #assert layer
+    # get variable with first layer for convenience
+    layer = layers.first   
+    # check whether this variable contains an object
+    assert layer, "There is no first layer object in this document."
     
+    #@todo assert that a selected layer has all attributes
+    %w{id name content_structure data_type}.each do |field|
+      assert_respond_to layer, field.to_sym, "layer object does not respond to \"#{field}\" method"
+      assert layer.send(field)
+      #assert scale.send(field)
+    end
+    
+    #@todo assert that layer connectors exist and contain all relevant attributes
+    #connector = 
+    
+  end
+
+  # check if the event set of the sample document responds to all accessors
+  # and returns reasonable values
+  def test_1400_event_set_complete
+    
+    assert true
   end
   
 end

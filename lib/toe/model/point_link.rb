@@ -1,4 +1,6 @@
-class ToE::Model::LayerLink < ToE::Model::Link
+class ToE::Model::PointLink < ToE::Model::Link
+  
+  attr_accessor :element
   
   def initialize
     super

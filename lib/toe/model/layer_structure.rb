@@ -4,14 +4,19 @@
 class ToE::Model::LayerStructure < ToE::Model::BasicToEObject
   
   attr_reader :layers
+  attr_reader :connectors
   
   def initialize
     super
-    @layers = []
-    @connectors = Hash.new #@todo put real objects here
+    @layers = Array.new
+    @connectors = Array.new
     
   end
   
+  def <<(layer)
+    add_layer(layer)
+  end
+    
   def add_layer(layer)
     @layers << layer
   end
@@ -22,6 +27,13 @@ class ToE::Model::LayerStructure < ToE::Model::BasicToEObject
   
   def connect(source_layer, target_layer, options = {})
     #@todo connection code
+    connector = LayerConnector.new
+    #connector.source = 
+  end
+  
+  def add_connector(connector_object)
+    #@todo add connector hash
+    connectors.add connector_object
   end
   
 end
