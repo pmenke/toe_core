@@ -1,0 +1,26 @@
+!!! Strict
+%EventDocument
+  %Head
+  %ScaleSet
+    -doc.scale_set.scales.each do |scale|
+      %Scale{:id=>scale.id,:name=>scale.name,:mode=>scale.mode,:continuous=>scale.continuous?.to_s,:unit=>scale.unit,:role=>scale.role}/
+  %ReferencedObjectList
+  %AgentList
+  %LayerStructure
+    -doc.layer_structure.layers.each do |layer|
+      %Layer{:id=>layer.id,:name=>layer.name,:contentStructure=>layer.content_structure,:dataType=>layer.data_type}/
+  %EventSet
+    -doc.event_set.events.each do |event|
+      %Event{:id=>event.id,:name=>event.name}
+        %LinkList
+          -event.layer_links.each do |link|
+            %LayerLink{:id=>link.id,:role=>link.role,:target=>link.target.id}/
+          -event.event_links.each do |link|
+            %EventLink{:id=>link.id,:role=>link.role,:target=>link.target.id}/
+          -event.point_links.each do |link|
+            %PointLink/
+          -event.interval_links.each do |link|
+            %IntervalLink{:id=>link.id,:target=>link.target.id,:role=>link.role,:min=>link.min,:max=>link.max}/
+        %Data
+          -if true
+            %String

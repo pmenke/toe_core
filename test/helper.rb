@@ -1,3 +1,6 @@
+#require 'simplecov'
+#SimpleCov.start
+
 require 'rubygems'
 require 'bundler'
 begin
@@ -8,6 +11,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'test/unit'
+require 'haml'
 #require 'shoulda'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))

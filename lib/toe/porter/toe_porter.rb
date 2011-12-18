@@ -90,17 +90,28 @@ class ToE::Porter::ToEPorter
       #document.root.attributes["id"] = "EventDocument"
       edoc = porter.read_xml(document.root)
       # resolve open tasks
-      perform_tasks
+      porter.perform_tasks
       return edoc
     end
 
     # export this instance to the given XML file.
     # @param (File) the file to write to. will be created
     #               if it does not exist.
-    def self.write(output_file)
+    def write(document, output_file)
       #@todo implement write(output_file)
+      File.open(output_file, 'w') { |file| file.write(write_engine.render(Object.new, {:doc => document})) }
     end
   
+    def write_engine
+      @write_engine ||= create_engine
+    end
+    
+    def create_engine
+      engine = ::Haml::Engine.new(File.read(File.join(File.dirname(__FILE__),'..','..','..','assets','haml','toe.xml.haml')))
+      engine.options[:attr_wrapper] = '"'
+      engine
+    end
+    
     # imports data from an XML toe document into this instance
     def read_xml(root)
       id = root.attributes["id"]
@@ -196,6 +207,8 @@ class ToE::Porter::ToEPorter
       @event_set.each_element do |el|
         if el.name == "Event"
           ev = Event.new
+          adopt el, ev, %w(id name)
+          store ev.id, ev
           edoc.event_set.add ev
           
           # @todo add links to object
@@ -207,11 +220,13 @@ class ToE::Porter::ToEPorter
                 if link_el.name == "LayerLink"
                   #puts "    link to Layer"
                   l = LayerLink.new
+                  adopt link_el, l, %w(id name)
                   l.target = target_object
                   ev.links << l
                 end
                 if link_el.name == "EventLink"
                   l = EventLink.new
+                  adopt link_el, l, %w(id name)
                   if target_object == nil
                     add_set_target_task(link_el.attributes["target"], l, :target)
                   else
@@ -222,7 +237,7 @@ class ToE::Porter::ToEPorter
                 if link_el.name == "PointLink"
                   l = PointLink.new
                   l.target = target_object unless target_object.nil?
-                  adopt link_el, l, %w(element order role)
+                  adopt link_el, l, %w(id name element order role)
                   l.element_type = link_el.attributes["elementType"]
                   ev.links << l
                 end
@@ -230,7 +245,7 @@ class ToE::Porter::ToEPorter
                   l = IntervalLink.new
                   l.target = target_object unless target_object.nil?
                   adopt link_el, l, %w(min max order role)
-                  l.element_type = link_el.attributes["elementType"]
+                  #l.element_type = link_el.attributes["elementType"]
                   ev.links << l
                 end
               end

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<EventDocument>
+  <Head></Head>
+  <ScaleSet>
+    <Scale continuous="true" id="timeline" mode="ratio" unit="ms" />
+    <Scale continuous="true" id="spacex" mode="ratio" unit="px" />
+    <Scale continuous="true" id="spacey" mode="ratio" unit="px" />
+    <Scale continuous="false" id="objects" mode="nominal" unit="" />
+    <Scale continuous="false" id="ratings" mode="ordinal" unit="" />
+  </ScaleSet>
+  <ReferencedObjectList></ReferencedObjectList>
+  <AgentList></AgentList>
+  <LayerStructure>
+    <Layer contentStructure="sequence" dataType="String" id="layer13" name="PersonA-Words" />
+    <Layer contentStructure="tree" dataType="unrestricted" id="layer14" name="PersonA-Phonemes" />
+  </LayerStructure>
+  <EventSet>
+    <Event id="event16">
+      <LinkList>
+        <LayerLink id="layerlink20" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event21">
+      <LinkList>
+        <LayerLink id="layerlink25" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event26">
+      <LinkList>
+        <LayerLink id="layerlink30" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event31">
+      <LinkList>
+        <LayerLink id="layerlink35" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event36">
+      <LinkList>
+        <LayerLink id="layerlink40" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event41">
+      <LinkList>
+        <LayerLink id="layerlink45" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event46">
+      <LinkList>
+        <LayerLink id="layerlink50" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event51">
+      <LinkList>
+        <LayerLink id="layerlink55" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event56">
+      <LinkList>
+        <LayerLink id="layerlink60" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+    <Event id="event61">
+      <LinkList>
+        <LayerLink id="layerlink65" target="layer13" />
+        <IntervalLink target="timeline" />
+      </LinkList>
+      <Data>
+        <String></String>
+      </Data>
+    </Event>
+  </EventSet>
+</EventDocument>

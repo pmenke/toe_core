@@ -49,6 +49,22 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
     @links << new_link unless @links.include? new_link
   end
   
+  def layer_links
+    @links.select{|l| l.is_a? LayerLink}
+  end
+  
+  def event_links
+    @links.select{|l| l.is_a? EventLink}
+  end
+  
+  def point_links
+    @links.select{|l| l.is_a? PointLink}
+  end
+  
+  def interval_links
+    @links.select{|l| l.is_a? IntervalLink}
+  end
+  
   # retrieves and returns all linked layers from the layer links
   def layers
     #@todo get array of layers from layer link objects

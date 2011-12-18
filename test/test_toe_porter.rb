@@ -15,16 +15,30 @@ class TestToEPorter < Test::Unit::TestCase
   
   
   # assure that import runs in one second or less.
-  def test_0000_general_benchmark
-    t = Benchmark.realtime{ 64.times { setup } }
-    puts "Benchmark: one run in about #{(t*1000.0/64.0)} milliseconds."
+  def test_0000_read_benchmark
+    n = 256.0
+    t = Benchmark.realtime{ n.to_i.times { setup } }
+    puts "Benchmark: one import in about #{(t*1000.0/n)} milliseconds."
     assert 1.0 > t
   end
   
-  def test_0001_list_storage
+  def test_0001_write_benchmark
+    n = 256.0
+    t = Benchmark.realtime{ n.to_i.times { @porter.write(@testdocument, File.dirname(__FILE__) + "/assets/OutputDocument.toe") } }
+    puts "Benchmark: one export in about #{(t*1000.0/n)} milliseconds."
+    assert 1.0 > t
+  end
+  
+  def test_0003_list_storage
     assert_nothing_raised do
       puts "Storage Size: #{@porter.storage_size}"
       puts @porter.list_storage
+    end
+  end
+  
+  def test_0005_immediate_export
+    assert_nothing_raised do
+      @porter.write(@testdocument, File.dirname(__FILE__) + "/assets/OutputDocument.toe")
     end
   end
   
@@ -43,7 +57,7 @@ class TestToEPorter < Test::Unit::TestCase
   def test_1040_document_elements_present
     assert_not_equal(0, @testdocument.scale_set.size)
     #assert_nothing_raised do
-      puts @testdocument.describe
+    #puts @testdocument.describe
     #end
   end
   
