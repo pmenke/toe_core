@@ -32,7 +32,7 @@ class TestToEPorter < Test::Unit::TestCase
   def test_0003_list_storage
     assert_nothing_raised do
       puts "Storage Size: #{@porter.storage_size}"
-      puts @porter.list_storage
+      #puts @porter.list_storage
     end
   end
   
@@ -40,6 +40,42 @@ class TestToEPorter < Test::Unit::TestCase
     assert_nothing_raised do
       @porter.write(@testdocument, File.dirname(__FILE__) + "/assets/OutputDocument.toe")
     end
+  end
+  
+  def test_0008_marshaling_dump_speed
+    n = 64.0
+    @mfile = File.open(File.dirname(__FILE__) + "/assets/MarshalledDocument.dat", "w+")
+    otime = Benchmark.realtime do
+      n.to_i.times do
+        Marshal.dump(@testdocument, @mfile)
+      end
+    end
+    puts "avg marshal export: #{1000.0*otime/n} milliseconds"
+    assert true
+  end
+  
+  def test_0009_marshaling_load_speed
+    n = 64.0
+    @indoc = nil
+    #@mfile = File.open(File.dirname(__FILE__) + "/assets/MarshalledDocument.dat", "r")
+    #@indoc = Marshal.load(@mfile) { |o|
+    #  puts "MO: #{o.class.name}"
+    #}
+    #assert true
+    #return
+    itime = Benchmark.realtime do
+      n.to_i.times do
+        @mfile = File.open(File.dirname(__FILE__) + "/assets/MarshalledDocument.dat", "r")
+        @indoc = Marshal.load(@mfile) { |o|
+          puts "MO: #{o.class.name}"
+        }
+      end
+      #puts @indoc.describe
+      assert @indoc
+    end
+    
+    puts "avg marshal import: #{1000.0*itime/n} milliseconds"
+    assert @indoc
   end
   
   def test_1010_toe_porter_read_test_document
@@ -87,7 +123,7 @@ class TestToEPorter < Test::Unit::TestCase
     scale = @testdocument.scale_set.first
     assert scale
     %w{id unit mode continuous?}.each do |field|
-      puts "<<#{field}>>"
+      #puts "<<#{field}>>"
       assert scale.send(field)
     end
   end
@@ -96,7 +132,7 @@ class TestToEPorter < Test::Unit::TestCase
   # and returns reasonable values
   def test_1300_layer_structure_complete
     struc = @testdocument.layer_structure
-    assert struc
+    assert struc, "There is no layer structure object."
     
     # layer structure has no further attributes
     # assert non-negative number of layers:
@@ -120,9 +156,9 @@ class TestToEPorter < Test::Unit::TestCase
     assert layer, "There is no first layer object in this document."
     
     #@todo assert that a selected layer has all attributes
-    %w{id name content_structure data_type}.each do |field|
+    %w{name content_structure data_type}.each do |field|
       assert_respond_to layer, field.to_sym, "layer object does not respond to \"#{field}\" method"
-      assert layer.send(field)
+      assert layer.send(field), "send does not work on \"#{field}\" method"
       #assert scale.send(field)
     end
     

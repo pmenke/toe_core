@@ -48,17 +48,23 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
         #  result << iline(6, "@#{att}: #{link.send(att)}")
         #end
         #export target as object reference.
-        result << iline(6, ">target: #{link.target}")
+        result << iline(6, ">target: #{link.target}") unless link.target.nil?
       end
+      result << iline(6, "@id: #{event.id}")
+      result << iline(6, "data: #{event.data}")
     end
     result
   end
   
-  def iline(indent, line)
-    return "**#{indent(indent)}#{line}\n"
+  def iline(ind, line)
+    #puts ind.class.name
+    #puts line.class.name
+    return "**#{indent(ind)}#{line}\n"
   end
   
   def indent(num=0)
+    #puts num
+    #puts num.class.name
     return "  "*num
   end
   

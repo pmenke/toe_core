@@ -27,6 +27,12 @@ class ToE::Model::ScaleSet < ToE::Model::BasicToEObject
     end
   end
   
+  def add(scale)
+    unless @scales.include? scale
+      @scales << scale
+    end
+  end
+  
   # remove the given scale from this scale set
   # @param [Scale] scale The scale object to remove
   def -(scale)

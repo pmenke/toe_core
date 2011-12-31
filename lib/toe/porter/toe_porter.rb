@@ -93,7 +93,7 @@ class ToE::Porter::ToEPorter
       edoc = porter.read_xml(document.root)
       # resolve open tasks
       porter.perform_tasks
-      puts "edoc import done."
+      edoc.porter=nil
       return edoc
     end
 
@@ -177,11 +177,12 @@ class ToE::Porter::ToEPorter
       # 2. parse scale set
       
       @scale_set.each_element do |e|
+        x = "Scale each element #{e}"
         if e.name == "Scale"
           scale = Scale.new
           store e.attributes["id"], scale
           adopt(e, scale, ["id", "name", "mode", "unit"])
-          if e.attributes["continuous"]=="true"
+          if e.attributes.collect{|a| a.value}.include?("continuous") && e.attributes["continuous"]=="true"
             scale.continuous = true
           else
             scale.continuous = false
@@ -195,6 +196,7 @@ class ToE::Porter::ToEPorter
         #puts "Layer: #{layer_el}"
         layer = Layer.new(edoc)
         adopt(layer_el, layer, %w{id name})
+        #puts "LAYER NAME: #{layer.name}"
         layer.content_structure = layer_el.attributes["contentStructure"]
         layer.data_type = layer_el.attributes["dataType"]
         edoc.layer_structure << layer
@@ -210,47 +212,53 @@ class ToE::Porter::ToEPorter
       @event_set.each_element do |el|
         if el.name == "Event"
           ev = Event.new
-          adopt el, ev, %w(id name)
+          adopt el, ev, %w(id)
           store ev.id, ev
-          edoc.event_set.add ev
           
           # @todo add links to object
           # LayerLinks, ScaleLinks EventLinks
           el.each_element do |subel|
+            x = "Link element #{subel}"
             if subel.name == "LinkList"
               subel.each_element do |link_el|
                 target_object = resolve(link_el.attributes["target"])
-                if link_el.name == "LayerLink"
-                  #puts "    link to Layer #{link_el}"
-                  l = LayerLink.new
-                  adopt link_el, l, %w(id name)
-                  l.target = target_object
-                  ev.links << l
-                  target_object.add_event(ev)
-                end
-                if link_el.name == "EventLink"
-                  l = EventLink.new
-                  adopt link_el, l, %w(id name)
-                  if target_object == nil
-                    add_set_target_task(link_el.attributes["target"], l, :target)
-                  else
+
+                s = link_el.to_s
+                
+                if link_el
+                  if link_el.name == "LayerLink"
+                    puts "  >>  link to Layer"
+                    l = LayerLink.new
+                    adopt link_el, l, %w(id name)
                     l.target = target_object
+                    puts "  >>  links: #{ev.links.size}"
+                    ev.links << l
+                    puts "  >>  links: #{ev.links.size}"
                   end
-                  ev.links << l
-                end
-                if link_el.name == "PointLink"
-                  l = PointLink.new
-                  l.target = target_object unless target_object.nil?
-                  adopt link_el, l, %w(id name element order role)
-                  l.element_type = link_el.attributes["elementType"]
-                  ev.links << l
-                end
-                if link_el.name == "IntervalLink"
-                  l = IntervalLink.new
-                  l.target = target_object unless target_object.nil?
-                  adopt link_el, l, %w(min max order role)
-                  #l.element_type = link_el.attributes["elementType"]
-                  ev.links << l
+                  if link_el.name == "EventLink"
+                    l = EventLink.new
+                    adopt link_el, l, %w(id name)
+                    if target_object == nil
+                      add_set_target_task(link_el.attributes["target"], l, :target)
+                    else
+                      l.target = target_object
+                    end
+                    ev.links << l
+                  end
+                  if link_el.name == "PointLink"
+                    l = PointLink.new
+                    l.target = target_object unless target_object.nil?
+                    adopt link_el, l, %w(id name element order role)
+                    l.element_type = link_el.attributes["elementType"]
+                    ev.links << l
+                  end
+                  if link_el.name == "IntervalLink"
+                    l = IntervalLink.new
+                    l.target = target_object unless target_object.nil?
+                    adopt link_el, l, %w(min max order role)
+                    #l.element_type = link_el.attributes["elementType"]
+                    ev.links << l
+                  end
                 end
               end
             end
@@ -269,6 +277,7 @@ class ToE::Porter::ToEPorter
           unless data_sub_el == nil
             ev.data = ::ToE::Model::Data.read(data_sub_el)
           end
+          edoc.event_set.add ev
         end
       end
       puts "edoc import done."
@@ -279,7 +288,14 @@ class ToE::Porter::ToEPorter
     
     def adopt(xml_node, target_object, attribute_names)
       attribute_names.each do |name|
-        target_object.send("#{name}=", xml_node.attributes[name])
+        if (xml_node.attributes[name] != nil && target_object.respond_to?("#{name}="))
+          target_object.send("#{name}=", xml_node.attributes[name])
+        else
+          a = xml_node.attributes[name] != nil
+          b = target_object.respond_to? "#{name}="
+          #puts "xml node has the attribute '#{name}'     : #{a} #{xml_node}"
+          #puts "target object does respond to '#{name}=' : #{b}"
+        end
       end
     end
   

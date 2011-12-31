@@ -18,7 +18,11 @@ class ToE::Model::EventSet < ToE::Model::BasicToEObject
       event.event_set = self
       @by_id[event.id] = event
       #event.layers.each do |layer|
-        
+      event.layers.each do |l|
+        puts "Cache a link to Layer #{l}"
+        @by_layer[l] = [] unless @by_layer.has_key?(l)
+        @by_layer[l] << event
+      end
       #end
     end
   end
@@ -30,6 +34,13 @@ class ToE::Model::EventSet < ToE::Model::BasicToEObject
   # returns the event with the given id.
   def find_by_id(id)
     @by_id[id]
+  end
+  
+  def find_by_layer(layer)
+    puts "EventSet: get events for a layer"
+    puts @by_layer.size
+    puts @by_layer[layer].size
+    return @by_layer[layer]
   end
   
   #@return [Integer or nil] the number of events in this event set

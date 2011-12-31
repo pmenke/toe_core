@@ -2,11 +2,11 @@
 <EventDocument>
   <Head></Head>
   <ScaleSet>
-    <Scale continuous="true" id="timeline" mode="ratio" unit="ms" />
-    <Scale continuous="true" id="spacex" mode="ratio" unit="px" />
-    <Scale continuous="true" id="spacey" mode="ratio" unit="px" />
-    <Scale continuous="false" id="objects" mode="nominal" unit="" />
-    <Scale continuous="false" id="ratings" mode="ordinal" unit="" />
+    <Scale continuous="false" id="timeline" mode="ratio" unit="ms" />
+    <Scale continuous="false" id="spacex" mode="ratio" unit="px" />
+    <Scale continuous="false" id="spacey" mode="ratio" unit="px" />
+    <Scale continuous="false" id="objects" mode="nominal" unit="none" />
+    <Scale continuous="false" id="ratings" mode="ordinal" unit="none" />
   </ScaleSet>
   <ReferencedObjectList></ReferencedObjectList>
   <AgentList></AgentList>

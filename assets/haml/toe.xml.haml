@@ -22,5 +22,4 @@
           -event.interval_links.each do |link|
             %IntervalLink{:id=>link.id,:target=>link.target.id,:role=>link.role,:min=>link.min,:max=>link.max}/
         %Data
-          -if true
-            %String
+          %String=event.data.to_s
