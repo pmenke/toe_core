@@ -62,6 +62,7 @@ class ToE::Porter::ToEPorter
     end
     
     def perform_tasks
+      puts "  performing post-import tasks"
       performed_tasks = []
       @tasks.each do |task|
         case task[:command]
@@ -71,6 +72,7 @@ class ToE::Porter::ToEPorter
           performed_tasks << task
         end
       end
+      puts "  post-import tasks done."
       @tasks = @tasks - performed_tasks
     end
     
@@ -91,6 +93,7 @@ class ToE::Porter::ToEPorter
       edoc = porter.read_xml(document.root)
       # resolve open tasks
       porter.perform_tasks
+      puts "edoc import done."
       return edoc
     end
 
@@ -190,7 +193,7 @@ class ToE::Porter::ToEPorter
       # 4. parse layer stuff
       find_children_by_name(@layer_structure, "Layer").each do |layer_el|
         #puts "Layer: #{layer_el}"
-        layer = Layer.new
+        layer = Layer.new(edoc)
         adopt(layer_el, layer, %w{id name})
         layer.content_structure = layer_el.attributes["contentStructure"]
         layer.data_type = layer_el.attributes["dataType"]
@@ -218,11 +221,12 @@ class ToE::Porter::ToEPorter
               subel.each_element do |link_el|
                 target_object = resolve(link_el.attributes["target"])
                 if link_el.name == "LayerLink"
-                  #puts "    link to Layer"
+                  #puts "    link to Layer #{link_el}"
                   l = LayerLink.new
                   adopt link_el, l, %w(id name)
                   l.target = target_object
                   ev.links << l
+                  target_object.add_event(ev)
                 end
                 if link_el.name == "EventLink"
                   l = EventLink.new
@@ -251,8 +255,23 @@ class ToE::Porter::ToEPorter
               end
             end
           end
+          #workaround!!!
+          # ev.data = find_children_by_name(el, "Data")[0].to_s
+          
+          # read data recursively
+          # Data/(String,Int,Float,Boolean,List,Map)
+          data_el = find_children_by_name(el, "Data")[0]
+          data_sub_el = data_el.find("./*")[0]
+          
+          #puts "Data EL:     #{data_el}"
+          #puts "Data Sub EL: #{data_sub_el}"
+
+          unless data_sub_el == nil
+            ev.data = ::ToE::Model::Data.read(data_sub_el)
+          end
         end
       end
+      puts "edoc import done."
       return edoc
     end
     
@@ -284,6 +303,10 @@ class ToE::Porter::ToEPorter
     
     def find_children_by_name(element, name) 
       element.find("./*[local-name()='#{name}']")
+    end
+    
+    def find_grandchildren_by_name(element, n1, n2)
+      element.find("./*[local-name()='#{n1}']/*[local-name()='#{n2}']")
     end
     
     def find_descendants_by_name(element, name) 
