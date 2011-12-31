@@ -80,13 +80,8 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
   # @return [Layer[]] an array of layers this event is linked to
   def layers
     #@todo get array of layers from layer link objects
-<<<<<<< Updated upstream
-    puts "  Links: #{@links}"
+    puts "  Links: #{@links.size}"
     layer_links.collect{|l| l.layer}.uniq
-=======
-    # puts "  Links: #{@links}"
-    @links.select{|l| l.is_a? LayerLink}.collect{|l| l.layer}.uniq
->>>>>>> Stashed changes
   end
   
   # retrieves and returns all linked scales from the scale links

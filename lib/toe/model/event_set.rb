@@ -19,7 +19,7 @@ class ToE::Model::EventSet < ToE::Model::BasicToEObject
       @by_id[event.id] = event
       #event.layers.each do |layer|
       event.layers.each do |l|
-        puts "Cache a link to Layer #{l}"
+        puts "Cache a link to Layer #{l.id}"
         @by_layer[l] = [] unless @by_layer.has_key?(l)
         @by_layer[l] << event
       end

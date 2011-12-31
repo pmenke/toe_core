@@ -21,8 +21,8 @@ class ToE::Model::Layer < ToE::Model::BasicToEObject
   def events
     #@todo method to get all events out of a layer.
     # later: get it from eventdocument=>layerstructure (?)
-   @events
-   # @events ||= @document.event_set.select{|e| e.layers.include?(self)}
+   #@events
+   @events ||= @document.event_set.select{|e| e.layers.include?(self)}
     
   end
   
