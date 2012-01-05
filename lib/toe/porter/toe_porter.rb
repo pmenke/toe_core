@@ -231,9 +231,9 @@ class ToE::Porter::ToEPorter
                     l = LayerLink.new
                     adopt link_el, l, %w(id name)
                     l.target = target_object
-                    puts "  >>  links: #{ev.links.size}"
+                    #puts "  >>  links: #{ev.links.size}"
                     ev.links << l
-                    puts "  >>  links: #{ev.links.size}"
+                    #puts "  >>  links: #{ev.links.size}"
                     
                   end
                   if link_el.name == "EventLink"
