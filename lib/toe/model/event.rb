@@ -80,7 +80,7 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
   # @return [Layer[]] an array of layers this event is linked to
   def layers
     #@todo get array of layers from layer link objects
-    puts "  Links: #{@links.size}"
+    # puts "  Links: #{@links.size}"
     layer_links.collect{|l| l.layer}.uniq
   end
   

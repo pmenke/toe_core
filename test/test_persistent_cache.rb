@@ -7,10 +7,12 @@ class TestPersistentCache < Test::Unit::TestCase
   #end
   
   def test_step
-    step1 = ToE::ToECache.instance.step
-    step2 = ToE::ToECache.instance.step
-    puts "#{step1}, #{step2}"
-    assert_equal 1, step2-step1
+    8.times do 
+      step1 = ToE::ToECache.instance.step
+      step2 = ToE::ToECache.instance.step
+      puts "#{step1}, #{step2}"
+      assert_equal 1, step2-step1
+    end
   end
   
 end

@@ -19,8 +19,13 @@ require 'toe/model/event_link.rb'
 require 'toe/model/point_link.rb'
 require 'toe/model/interval_link.rb'
 require 'toe/model/data.rb'
+
 require 'toe/porter.rb'
 require 'toe/porter/toe_porter.rb'
-require 'toe/toe_cache.rb'
+require 'toe/porter/short_text_grid_porter.rb'
+
 require 'toe/gen.rb'
 require 'toe/gen/random_document_generator.rb'
+
+require 'toe/util.rb'
+require 'toe/toe_cache.rb'

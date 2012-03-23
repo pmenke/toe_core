@@ -62,7 +62,7 @@ class ToE::Porter::ToEPorter
     end
     
     def perform_tasks
-      puts "  performing post-import tasks"
+      # puts "  performing post-import tasks"
       performed_tasks = []
       @tasks.each do |task|
         case task[:command]
@@ -72,7 +72,7 @@ class ToE::Porter::ToEPorter
           performed_tasks << task
         end
       end
-      puts "  post-import tasks done."
+      # puts "  post-import tasks done."
       @tasks = @tasks - performed_tasks
     end
     
@@ -81,7 +81,7 @@ class ToE::Porter::ToEPorter
     end
     
     # create a new instance by importing the given XML file
-    def self.read(input_file, pPorter=nil)
+    def self.read(input_file, pPorter=nil, options = {})
       parser = ::LibXML::XML::Parser.file(input_file)
       document = parser.parse
       if pPorter.nil?
@@ -227,7 +227,7 @@ class ToE::Porter::ToEPorter
                 
                 if link_el
                   if link_el.name == "LayerLink"
-                    puts "  >>  link to Layer"
+                    # puts "  >>  link to Layer"
                     l = LayerLink.new
                     adopt link_el, l, %w(id name)
                     l.target = target_object
@@ -281,7 +281,7 @@ class ToE::Porter::ToEPorter
           edoc.event_set.add ev
         end
       end
-      puts "edoc import done."
+      # puts "edoc import done."
       return edoc
     end
     

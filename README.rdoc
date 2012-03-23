@@ -1,9 +1,9 @@
-= toe-core
+= toe_core
 
 This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.
 
 
-== Contributing to toe-core
+== Contributing to toe_core
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
