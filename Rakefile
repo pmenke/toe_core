@@ -14,7 +14,7 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "toe-core"
+  gem.name = "toe_core"
   gem.homepage = "http://github.com/pmenke/toe-core"
   gem.license = "MIT"
   gem.summary = %Q{Ruby implementation of the ToE (time-oriented events) data model}
