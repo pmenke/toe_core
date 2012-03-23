@@ -16,17 +16,17 @@ class TestToEPorter < Test::Unit::TestCase
   
   # assure that import runs in one second or less.
   def test_0000_read_benchmark
-    n = 256.0
+    n = 128.0
     t = Benchmark.realtime{ n.to_i.times { setup } }
     puts "Benchmark: one import in about #{(t*1000.0/n)} milliseconds."
-    assert 1.0 > t
+    assert (1.0*n) > t, "read benchmark took longer than one second."
   end
   
   def test_0001_write_benchmark
-    n = 256.0
+    n = 128.0
     t = Benchmark.realtime{ n.to_i.times { @porter.write(@testdocument, File.dirname(__FILE__) + "/assets/OutputDocument.toe") } }
     puts "Benchmark: one export in about #{(t*1000.0/n)} milliseconds."
-    assert 1.0 > t
+    assert (1.0*n) > t, "write benchmark took longer than one second."
   end
   
   def test_0003_list_storage
@@ -124,7 +124,7 @@ class TestToEPorter < Test::Unit::TestCase
     assert scale
     %w{id unit mode continuous?}.each do |field|
       #puts "<<#{field}>>"
-      assert scale.send(field)
+      assert scale.respond_to?(field), "Scale is missing #{field} field."
     end
   end
   
@@ -170,7 +170,7 @@ class TestToEPorter < Test::Unit::TestCase
   # check if the event set of the sample document responds to all accessors
   # and returns reasonable values
   def test_1400_event_set_complete
-    
+    # TODO complete tests for event set
     assert true
   end
   

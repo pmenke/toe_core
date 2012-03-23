@@ -4,14 +4,24 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
+<<<<<<< HEAD
   s.name = "toe_core"
+=======
+  s.name = %q{toe_core}
+>>>>>>> origin/master
   s.version = "0.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Menke"]
+<<<<<<< HEAD
   s.date = "2012-03-22"
   s.description = "This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments."
   s.email = "pmenke@googlemail.com"
+=======
+  s.date = %q{2012-03-21}
+  s.description = %q{This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.}
+  s.email = %q{pmenke@googlemail.com}
+>>>>>>> origin/master
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -24,7 +34,10 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "assets/haml/toe.xml.haml",
+<<<<<<< HEAD
     "lib/toe-core.rb",
+=======
+>>>>>>> origin/master
     "lib/toe.rb",
     "lib/toe/gen.rb",
     "lib/toe/gen/random_document_generator.rb",
@@ -61,6 +74,7 @@ Gem::Specification.new do |s|
     "test/test_toe_porter.rb",
     "toe-core.gemspec"
   ]
+<<<<<<< HEAD
   s.homepage = "http://github.com/pmenke/toe-core"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
@@ -68,6 +82,16 @@ Gem::Specification.new do |s|
   s.summary = "Ruby implementation of the ToE (time-oriented events) data model"
 
   if s.respond_to? :specification_version then
+=======
+  s.homepage = %q{http://github.com/pmenke/toe_core}
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.3.7}
+  s.summary = %q{Ruby implementation of the ToE (time-oriented events) data model}
+
+  if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+>>>>>>> origin/master
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then

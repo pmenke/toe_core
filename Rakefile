@@ -15,7 +15,11 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "toe_core"
+<<<<<<< HEAD
   gem.homepage = "http://github.com/pmenke/toe-core"
+=======
+  gem.homepage = "http://github.com/pmenke/toe_core"
+>>>>>>> origin/master
   gem.license = "MIT"
   gem.summary = %Q{Ruby implementation of the ToE (time-oriented events) data model}
   gem.description = %Q{This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.}
@@ -47,7 +51,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "toe-core #{version}"
+  rdoc.title = "toe_core #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
@@ -59,7 +63,7 @@ require 'haml'
 require 'benchmark'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'toe-core'
+require 'toe_core'
 
 task :benchmark do
   folder = File.dirname(__FILE__) + "/benchmark/"
