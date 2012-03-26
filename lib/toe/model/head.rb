@@ -9,7 +9,7 @@ class ToE::Model::Head < ToE::Model::BasicToEObject
     @features = Array.new  
   end
   
-  # TODO helper methods to get features by type, by key, etc.
+  # TODO (low) helper methods to get features by type, by key, etc.
   
   def <<(feature)
     @features << feature

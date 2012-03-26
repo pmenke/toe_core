@@ -37,7 +37,7 @@ class ToE::Gen::RandomDocumentGenerator
     end
     
     params[:layers].times do |n|
-      layer = Layer.new
+      layer = Layer.new(doc)
       layer.id = "layer#{n}"
       layer.name = layer.id
       layer.content_structure = "undefined"

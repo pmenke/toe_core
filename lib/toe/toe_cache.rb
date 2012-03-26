@@ -13,7 +13,7 @@ require 'singleton'
     end
 	  
 	  def cached?(toe_document)
-	    #@todo return true if this document is in the cache already
+	    #@todo (med) return true if this document is in the cache already
     end
     
     def add_document(toe_document)

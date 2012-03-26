@@ -155,14 +155,14 @@ class TestToEPorter < Test::Unit::TestCase
     # check whether this variable contains an object
     assert layer, "There is no first layer object in this document."
     
-    #@todo assert that a selected layer has all attributes
+    # assert that a selected layer has all attributes
     %w{name content_structure data_type}.each do |field|
       assert_respond_to layer, field.to_sym, "layer object does not respond to \"#{field}\" method"
       assert layer.send(field), "send does not work on \"#{field}\" method"
       #assert scale.send(field)
     end
     
-    #@todo assert that layer connectors exist and contain all relevant attributes
+    #@todo (med) assert that layer connectors exist and contain all relevant attributes
     #connector = 
     
   end
@@ -170,7 +170,7 @@ class TestToEPorter < Test::Unit::TestCase
   # check if the event set of the sample document responds to all accessors
   # and returns reasonable values
   def test_1400_event_set_complete
-    # TODO complete tests for event set
+    # @todo complete tests for event set
     assert true
   end
   

@@ -32,7 +32,7 @@ class ToE::Porter::ShortTextGridPorter
   def self.read_with_encoding(input_file, encoding, porter=nil, options = {})
     include ToE::Model 
 
-      # TODO now do some work with the data.
+      # now do some work with the data.
       # document looks as follows:
       # ----------------
       # File type = ""
@@ -56,7 +56,7 @@ class ToE::Porter::ShortTextGridPorter
     
     document = ToEDocument.new
     document.id = "toedocument"
-    scale = Scale.new # TODO complete scale object
+    scale = Scale.new
     scale.id = "timeline"
     scale.name = "timeline"
     scale.mode = :Ratio

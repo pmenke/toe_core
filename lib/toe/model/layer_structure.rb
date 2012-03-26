@@ -10,7 +10,6 @@ class ToE::Model::LayerStructure < ToE::Model::BasicToEObject
     super
     @layers = Array.new
     @connectors = Array.new
-    
   end
   
   def <<(layer)
@@ -26,13 +25,14 @@ class ToE::Model::LayerStructure < ToE::Model::BasicToEObject
   end
   
   def connect(source_layer, target_layer, options = {})
-    #@todo connection code
     connector = LayerConnector.new
-    #connector.source = 
+    connector.source = source_layer
+    connector.target = target_layer
+    #@todo (low) priority, role, other stuff?
+    add_connector(connector)
   end
   
   def add_connector(connector_object)
-    #@todo add connector hash
     connectors.add connector_object
   end
   

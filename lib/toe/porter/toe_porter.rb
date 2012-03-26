@@ -101,7 +101,6 @@ class ToE::Porter::ToEPorter
     # @param (File) the file to write to. will be created
     #               if it does not exist.
     def write(document, output_file)
-      #@todo implement write(output_file)
       puts "porter write."
       File.open(output_file, 'w') do |file|
         puts "get engine, then write"
@@ -221,17 +220,13 @@ class ToE::Porter::ToEPorter
           ev = Event.new
           adopt el, ev, %w(id)
           store ev.id, ev
-          
-          # @todo add links to object
           # LayerLinks, ScaleLinks EventLinks
           el.each_element do |subel|
             x = "Link element #{subel}"
             if subel.name == "LinkList"
               subel.each_element do |link_el|
                 target_object = resolve(link_el.attributes["target"])
-
                 s = link_el.to_s
-                
                 if link_el
                   if link_el.name == "LayerLink"
                     # puts "  >>  link to Layer"
@@ -241,7 +236,6 @@ class ToE::Porter::ToEPorter
                     #puts "  >>  links: #{ev.links.size}"
                     ev.links << l
                     #puts "  >>  links: #{ev.links.size}"
-                    
                   end
                   if link_el.name == "EventLink"
                     l = EventLink.new

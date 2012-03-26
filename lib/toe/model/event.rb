@@ -79,7 +79,6 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
   # retrieves and returns all linked layers from the layer links
   # @return [Layer[]] an array of layers this event is linked to
   def layers
-    #@todo get array of layers from layer link objects
     # puts "  Links: #{@links.size}"
     layer_links.collect{|l| l.layer}.uniq
   end
@@ -87,7 +86,6 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
   # retrieves and returns all linked scales from the scale links
   # @return [Scale[]] an array of scales this event is linked to
   def scales
-    #@todo get array of scales from scale link objects
     (point_links+interval_links).collect{|l| l.target.is_a? Scale}.uniq
   end
   

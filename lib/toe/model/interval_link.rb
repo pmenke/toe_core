@@ -10,7 +10,7 @@ class ToE::Model::IntervalLink < ToE::Model::Link
     target
   end
   
-  #@todo create interval module!
+  #@todo (med) create interval module!
   # operates on min and max values
   # calculates any other property out of those two values
   
