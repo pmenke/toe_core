@@ -102,7 +102,12 @@ class ToE::Porter::ToEPorter
     #               if it does not exist.
     def write(document, output_file)
       #@todo implement write(output_file)
-      File.open(output_file, 'w') { |file| file.write(write_engine.render(Object.new, {:doc => document})) }
+      puts "porter write."
+      File.open(output_file, 'w') do |file|
+        puts "get engine, then write"
+        file.write(write_engine.render(Object.new, {:doc => document}))
+      end
+      return true
     end
   
     def write_engine
@@ -110,9 +115,11 @@ class ToE::Porter::ToEPorter
     end
     
     def create_engine
+      puts "create engine."
       engine = ::Haml::Engine.new(File.read(File.join(File.dirname(__FILE__),'..','..','..','assets','haml','toe.xml.haml')))
       engine.options[:attr_wrapper] = '"'
-      engine
+      puts "Engine: #{engine}"
+      return engine
     end
     
     # imports data from an XML toe document into this instance

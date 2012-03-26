@@ -55,6 +55,7 @@ class ToE::Porter::ShortTextGridPorter
     f = File.open(input_file, "rb:#{encoding}:UTF-8")
     
     document = ToEDocument.new
+    document.id = "toedocument"
     scale = Scale.new # TODO complete scale object
     scale.id = "timeline"
     scale.name = "timeline"
@@ -75,17 +76,31 @@ class ToE::Porter::ShortTextGridPorter
     
     
     numberOfTiers.times do |tierNumber|
-      puts "TIER: #{tierNumber}"
+      #puts "TIER: #{tierNumber}"
       
       tierType = f.gets.strip
       tierName = f.gets.strip
       tier_min = f.gets.to_f
       tier_max = f.gets.to_f
       
+      #puts "minmax: %i, %i" % [tier_min, tier_max]
+      
+      #puts "tier name: %s" % tierName
+      
+      #puts "document: %s" % document.to_s
+       
       # create layer object from that tier
+      #puts "layer constructor before"
       layer = Layer.new(document)
-      layer.name = ToE::Util::strip_quotes tierName
-      layer.id = ToE::Util::to_xml_id tierName
+      #puts "layer constructor done"
+      
+      #puts "strip quotes"
+      layer.name = ToE::Util::strip_quotes(tierName)
+      
+      #puts "to xml id"
+      layer.id = ToE::Util::to_xml_id(tierName)
+      
+      #puts "layer: %s" % layer.name
       
       numberOfAnnotations = f.gets.to_i
       
@@ -95,7 +110,7 @@ class ToE::Porter::ShortTextGridPorter
         anno_max = f.gets.to_f
         anno_val = f.gets.strip.gsub(/^"/, "").gsub(/"$/, "")
         
-        puts "  #{anno_val} [#{anno_min}--#{anno_max}]"
+        #puts "  #{anno_val} [#{anno_min}--#{anno_max}]"
         
         event = Event.new #(document)
         interval = IntervalLink.new
@@ -112,7 +127,6 @@ class ToE::Porter::ShortTextGridPorter
       end
       
       document.layer_structure << layer
-      
       
     end
     

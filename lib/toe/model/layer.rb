@@ -7,7 +7,10 @@ class ToE::Model::Layer < ToE::Model::BasicToEObject
   attr_accessor :document
   
   def initialize(pDocument)
-    super
+    super()
+    
+    puts "layer constructor"
+    
     @events = []
     @document=pDocument
   end

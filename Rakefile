@@ -15,11 +15,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "toe_core"
-<<<<<<< HEAD
-  gem.homepage = "http://github.com/pmenke/toe-core"
-=======
   gem.homepage = "http://github.com/pmenke/toe_core"
->>>>>>> origin/master
   gem.license = "MIT"
   gem.summary = %Q{Ruby implementation of the ToE (time-oriented events) data model}
   gem.description = %Q{This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.}
