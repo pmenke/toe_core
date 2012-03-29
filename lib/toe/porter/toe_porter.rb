@@ -85,7 +85,7 @@ class ToE::Porter::ToEPorter
       parser = ::LibXML::XML::Parser.file(input_file)
       document = parser.parse
       if pPorter.nil?
-        porter = ToEPorter.instance
+        porter = ::ToE::Porter::ToEPorter.instance
       else
         porter = pPorter
       end

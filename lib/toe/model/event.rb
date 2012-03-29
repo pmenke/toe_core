@@ -16,8 +16,34 @@ class ToE::Model::Event < ToE::Model::BasicToEObject
   # @return [Array] data object of this event
   attr_reader :links
   
-  
   public
+  
+  # Creates a new interval event.
+  # @param params [Hash] hash of params for the new event
+  def self.create_interval_event(params)
+    value = params[:value] || ""
+     #document = params[:document] || nil
+    scale = params[:scale] || nil
+    min = params[:min] || 0.0
+    max = params[:max] || 0.0
+    layer = params[:layer] || nil
+    
+    event = ::ToE::Model::Event.new
+    ilink = ::ToE::Model::IntervalLink.new
+    ilink.target = scale unless scale.nil?
+    ilink.min = min
+    ilink.max = max
+    event.add_link(ilink)
+    event.data = value
+    
+    unless layer.nil?
+      llink = LayerLink.new
+      llink.target = layer
+      event.add_link(llink)
+    end
+    
+    return event
+  end
   
   # create a new, empty and unlinked Event object.
   def initialize

@@ -141,4 +141,20 @@ class TestToeCore < Test::Unit::TestCase
     assert_equal 3, data["green"]
   end
   
+  def test_9001_event_read_write
+    
+    assert_nothing_raised do
+    
+      doc = ToEDocument.new
+      scale = Scale.new(doc)
+      doc.scale_set << scale
+      layer = Layer.new(doc)
+      doc.layer_structure << layer
+      ev = Event.create_interval_event(value: "Hello", min: 0.0, max: 1.0, scale: scale)
+      layer.add_event(ev)
+    
+    end
+    
+  end
+    
 end

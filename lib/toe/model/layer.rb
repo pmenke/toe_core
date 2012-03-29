@@ -8,26 +8,17 @@ class ToE::Model::Layer < ToE::Model::BasicToEObject
   
   def initialize(pDocument)
     super()
-    
     puts "layer constructor"
-    
-    @events = []
     @document=pDocument
   end
 
-
   def add_event(e)
-    @events << e
+    document.event_set.add(e)
   end
   
   # get all events inside a layer
   def events
-    
-    # later: get it from eventdocument=>layerstructure (?)
-    #@events
-    @events ||= @document.event_set.select{|e| e.layers.include?(self)}
-    
+    return document.event_set.find_by_layer(self)
   end
-  
   
 end

@@ -19,6 +19,13 @@ class ToE::Model::Scale < ToE::Model::BasicToEObject
     @@MODES.include? mode
   end
 
+  
+  def initialize(document, params={})
+    # super
+    self.document = document
+    # @todo adopt params
+  end
+  
   # Return the dimension of this scale.
   # @return [String] the dimension of this scale.
   def dimension
