@@ -236,6 +236,7 @@ class ToE::Porter::ToEPorter
                     #puts "  >>  links: #{ev.links.size}"
                     ev.links << l
                     #puts "  >>  links: #{ev.links.size}"
+                    target_object.add_event(ev)
                   end
                   if link_el.name == "EventLink"
                     l = EventLink.new

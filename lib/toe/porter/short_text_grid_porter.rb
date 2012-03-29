@@ -112,18 +112,23 @@ class ToE::Porter::ShortTextGridPorter
         
         #puts "  #{anno_val} [#{anno_min}--#{anno_max}]"
         
-        event = Event.new #(document)
-        interval = IntervalLink.new
-        interval.min = anno_min
-        interval.max = anno_max
-        interval.target = scale
-        event.links << interval
-        layerlink = LayerLink.new
-        layerlink.target = layer
-        event.links << layerlink
-        event.data = anno_val
+        if anno_val.strip != ""
+          
+          event = Event.new #(document)
+          interval = IntervalLink.new
+          interval.min = anno_min
+          interval.max = anno_max
+          interval.target = scale
+          event.links << interval
+          layerlink = LayerLink.new
+          layerlink.target = layer
+          event.links << layerlink
+          event.data = anno_val
+          
+          document.event_set.add(event)
+          
+        end
         
-        document.event_set.add(event)
       end
       
       document.layer_structure << layer
