@@ -2,6 +2,8 @@
 # and open the template in the editor.
 
 class ToE::Model::EventSet < ToE::Model::BasicToEObject
+
+  # FIXME Doc me!
   def initialize
     
     @events = Array.new
@@ -27,6 +29,7 @@ class ToE::Model::EventSet < ToE::Model::BasicToEObject
     end
   end
   
+  # FIXME Doc me!
   def events
     @events
   end
@@ -36,6 +39,7 @@ class ToE::Model::EventSet < ToE::Model::BasicToEObject
     @by_id[id]
   end
   
+  # FIXME Doc me!
   def find_by_layer(layer)
     # puts "EventSet: get events for a layer"
     # puts @by_layer.size

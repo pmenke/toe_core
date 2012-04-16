@@ -1,9 +1,26 @@
-# class Scale
+# Scales create dimensions in space along which annotation objects can be aligned and oriented.
+# The most common scale type is the timeline found in many transcription and annotation systems.
+# But spatial and multidimensional scales are also possible.
+# 
+# == Creation
+#
+# Since scales typically are part of a document, the usual way to obtain a new scale object is
+# to use a class method of {ToEDocument}:
+#
+#  ToEDocument.create_scale(params)
+#
+# You can also use the constructor although its use is not encouraged:
+#
+#  scale = Scale.new({:mode => :Nominal})
+#
+# However...
+
 class ToE::Model::Scale < ToE::Model::BasicToEObject
 
   include BelongsToEventDocument
   
   @@MODES = [:Nominal, :Ordinal, :OrdinalCyclic, :Cardinal, :CardinalCyclic, :Ratio]
+
   
   public
   
@@ -15,11 +32,18 @@ class ToE::Model::Scale < ToE::Model::BasicToEObject
     @@MODES
   end
   
+  # Checks whether the given object refers to a valid mode.
+  # @param [Object] mode an object that somehow describes a mode.
+  # @return [Mode] the corresponding mode symbol, or nil if nothing was found.
   def self.is_valid_mode?(mode)
-    @@MODES.include? mode
+    return mode if @@MODES.include? mode
+    return nil
   end
 
-  
+  # Creates a new floating scale object.
+  # @param [ToEDocument] document The ToE document this scale should belong to
+  # @option params [MODE]    :mode  The scale mode to use. See {Scale.Modes} for a list of values.
+  # @option params [String]  :unit  The unit of the scale (SI unit or a custom one).
   def initialize(document, params={})
     # super
     self.document = document

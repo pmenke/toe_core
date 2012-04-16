@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<EventDocument>
+  <Head></Head>
+  <ScaleSet>
+    <Scale continuous="true" id="scale0" mode="ratio" name="scale0" role="" unit="s" />
+    <Scale continuous="true" id="scale1" mode="ratio" name="scale1" role="" unit="s" />
+  </ScaleSet>
+  <ReferencedObjectList></ReferencedObjectList>
+  <AgentList></AgentList>
+  <LayerStructure>
+    <Layer contentStructure="undefined" dataType="undefined" id="layer0" name="layer0" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer1" name="layer1" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer2" name="layer2" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer3" name="layer3" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer4" name="layer4" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer5" name="layer5" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer6" name="layer6" />
+    <Layer contentStructure="undefined" dataType="undefined" id="layer7" name="layer7" />
+  </LayerStructure>
+  <EventSet>
+    <Event id="event0">
+      <LinkList>
+        <LayerLink target="layer3" />
+        <IntervalLink max="0.0" min="0.0" target="scale0" />
+      </LinkList>
+      <Data>
+        <String>gyrbiempu</String>
+      </Data>
+    </Event>
+    <Event id="event1">
+      <LinkList>
+        <LayerLink target="layer0" />
+        <IntervalLink max="0.0" min="0.0" target="scale1" />
+      </LinkList>
+      <Data>
+        <String>bainpomsetun</String>
+      </Data>
+    </Event>
+    <Event id="event2">
+      <LinkList>
+        <LayerLink target="layer1" />
+        <IntervalLink max="0.0" min="0.0" target="scale0" />
+      </LinkList>
+      <Data>
+        <String>sa</String>
+      </Data>
+    </Event>
+    <Event id="event3">
+      <LinkList>
+        <LayerLink target="layer1" />
+        <IntervalLink max="0.0" min="0.0" target="scale1" />
+      </LinkList>
+      <Data>
+        <String>kynsurben</String>
+      </Data>
+    </Event>
+  </EventSet>
+</EventDocument>
