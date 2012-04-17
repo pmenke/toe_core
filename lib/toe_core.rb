@@ -23,6 +23,8 @@ require 'toe/model/data.rb'
 require 'toe/porter.rb'
 require 'toe/porter/toe_porter.rb'
 require 'toe/porter/short_text_grid_porter.rb'
+require 'toe/porter/text_grid_porter.rb'
+require 'toe/porter/rdf_porter.rb'
 
 require 'toe/gen.rb'
 require 'toe/gen/random_document_generator.rb'

@@ -185,7 +185,7 @@ class ToE::Porter::ToEPorter
       @scale_set.each_element do |e|
         x = "Scale each element #{e}"
         if e.name == "Scale"
-          scale = Scale.new
+          scale = Scale.new(edoc)
           store e.attributes["id"], scale
           adopt(e, scale, ["id", "name", "mode", "unit"])
           if e.attributes.collect{|a| a.value}.include?("continuous") && e.attributes["continuous"]=="true"

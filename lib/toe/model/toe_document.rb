@@ -13,6 +13,7 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
     @porter = nil
     @head = Head.new
     @scale_set = ScaleSet.new
+    # @todo initialize referenced object list
     @agent_list = Hash.new #@todo (med) create actual AgentList class
     @layer_structure = LayerStructure.new
     @event_set = EventSet.new

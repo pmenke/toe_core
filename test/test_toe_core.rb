@@ -1,9 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class TestToeCore < Test::Unit::TestCase
-  #should "probably rename this file and start testing for real" do
-  #  flunk "hey buddy, you should probably rename this file and start testing for real"
-  #end
   
   def get_data_for_snippet(snippet)
     parser = ::LibXML::XML::Parser.string(snippet)
