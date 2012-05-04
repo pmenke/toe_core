@@ -13,6 +13,7 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
     @porter = nil
     @head = Head.new
     @scale_set = ScaleSet.new
+    # @todo initialize referenced object list
     @agent_list = Hash.new #@todo (med) create actual AgentList class
     @layer_structure = LayerStructure.new
     @event_set = EventSet.new
@@ -55,7 +56,27 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
     end
     result
   end
+
   
+  # Creates a new scale object in this document.
+  # @option params [String] :name A name for the scale.
+  # @option params [Scale.Modes] :mode A name for the scale.
+  # @option params [String] :unit A name for the scale.
+  # @option params [String] :dimension A name for the scale.
+  # @option params [Boolean] :continuous A name for the scale.
+  
+  def create_scale(params={})
+    scale = Scale.new(self)
+    # todo adopt params
+    self.scale_set << scale
+  end
+  
+  def create_layer(params={})
+    
+  end
+  
+  private
+    
   def iline(ind, line)
     #puts ind.class.name
     #puts line.class.name
@@ -67,5 +88,7 @@ class ToE::Model::ToEDocument < ToE::Model::BasicToEObject
     #puts num.class.name
     return "  "*num
   end
+
+  
   
 end

@@ -42,3 +42,4 @@ Gemfile.lock
 /*.directory
 /nbproject/private/
 /.idea/
+test/assets/MarshalledDocument.dat

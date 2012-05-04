@@ -1,12 +1,15 @@
+# FIXME Doc me!
 class ToE::Model::IntervalLink < ToE::Model::Link
   
   attr_accessor :min, :max
   
+  # FIXME Doc me!
   def initialize
     super
   end
   
   # todo layer ist falsch
+  # FIXME Doc me!
   def layer
     target
   end

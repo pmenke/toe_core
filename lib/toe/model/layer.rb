@@ -20,13 +20,21 @@ class ToE::Model::Layer < ToE::Model::BasicToEObject
   def events
     return document.event_set.find_by_layer(self)
   end
-
+  
   def show_content_structure
-    return content_structure || "undefined"
+    if content_structure==nil
+      return "(none)"
+    else
+      return content_structure.to_s
+    end
   end
-
+  
   def show_data_type
-    return data_type || "undefined"
+    if data_type==nil
+      return "(none)"
+    else
+      return data_type.to_s
+    end
   end
-
+  
 end

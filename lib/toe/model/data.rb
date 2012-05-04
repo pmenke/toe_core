@@ -1,3 +1,4 @@
+# FIXME Doc me!
 class ToE::Model::Data
   
   TRUTH_VALS = %w(true TRUE 1 yes)
@@ -20,11 +21,6 @@ class ToE::Model::Data
       return ::ToE::Model::Data.read_map(element)      
     end
   end
-  
-  # @todo (hi) method read_int
-  # @todo (hi) read_double
-  # @todo (hi) read_bool
-  # @todo (hi) read_list
   
   # attempts to read a string from an element
   # @param   element (XML::Node)  the element to read
@@ -54,7 +50,7 @@ class ToE::Model::Data
     return (TRUTH_VALS.include?(element.content) ? true : false)
   end
   
-  
+  # FIXME Doc me!
   def self.read_list(element)
     result = Array.new
     element.each_element do |e|
@@ -63,6 +59,7 @@ class ToE::Model::Data
     return result
   end
   
+  # FIXME Doc me!
   def self.read_map(element)
     x = Hash.new
     element.each_element do |e|
