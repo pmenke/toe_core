@@ -24,4 +24,12 @@ class TestPraatPorters < Test::Unit::TestCase
     porter.write(doc, File.dirname(__FILE__) + "/assets/output.toe")  
   end
 
+  def test_2001_textgrid_porter
+    doc = ToE::Porter::TextGridPorter.read(File.dirname(__FILE__) + "/assets/input.TextGrid", nil)
+    assert doc
+    assert doc.id
+    porter = ToE::Porter::ToEPorter.instance
+    porter.write(doc, File.dirname(__FILE__) + "/assets/outputTextgrid.toe")
+  end
+
 end

@@ -41,3 +41,4 @@ Gemfile.lock
 .project
 /*.directory
 /nbproject/private/
+/.idea/

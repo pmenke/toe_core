@@ -6,6 +6,7 @@ class ToE::Model::IntervalLink < ToE::Model::Link
     super
   end
   
+  # todo layer ist falsch
   def layer
     target
   end

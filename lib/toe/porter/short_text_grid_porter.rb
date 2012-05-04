@@ -56,7 +56,7 @@ class ToE::Porter::ShortTextGridPorter
     
     document = ToEDocument.new
     document.id = "toedocument"
-    scale = Scale.new
+    scale = Scale.new(document)
     scale.id = "timeline"
     scale.name = "timeline"
     scale.mode = :Ratio

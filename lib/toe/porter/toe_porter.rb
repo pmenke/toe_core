@@ -101,9 +101,9 @@ class ToE::Porter::ToEPorter
     # @param (File) the file to write to. will be created
     #               if it does not exist.
     def write(document, output_file)
-      puts "porter write."
+      #puts "porter write."
       File.open(output_file, 'w') do |file|
-        puts "get engine, then write"
+        #puts "get engine, then write"
         file.write(write_engine.render(Object.new, {:doc => document}))
       end
       return true
@@ -114,10 +114,10 @@ class ToE::Porter::ToEPorter
     end
     
     def create_engine
-      puts "create engine."
+      # puts "create engine."
       engine = ::Haml::Engine.new(File.read(File.join(File.dirname(__FILE__),'..','..','..','assets','haml','toe.xml.haml')))
       engine.options[:attr_wrapper] = '"'
-      puts "Engine: #{engine}"
+      # puts "Engine: #{engine}"
       return engine
     end
     
@@ -185,7 +185,7 @@ class ToE::Porter::ToEPorter
       @scale_set.each_element do |e|
         x = "Scale each element #{e}"
         if e.name == "Scale"
-          scale = Scale.new
+          scale = Scale.new(edoc)
           store e.attributes["id"], scale
           adopt(e, scale, ["id", "name", "mode", "unit"])
           if e.attributes.collect{|a| a.value}.include?("continuous") && e.attributes["continuous"]=="true"

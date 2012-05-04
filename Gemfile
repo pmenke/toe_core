@@ -6,6 +6,7 @@ source "http://rubygems.org"
 gem 'libxml-ruby'
 gem 'haml'
 gem 'simplecov', :require => false, :group => :test
+gem 'nokogiri'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

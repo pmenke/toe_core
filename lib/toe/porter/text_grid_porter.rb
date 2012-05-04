@@ -56,13 +56,15 @@ class ToE::Porter::TextGridPorter
     
     document = ToEDocument.new
     document.id = "toedocument"
-    scale = Scale.new
+    scale = Scale.new(document)
     scale.id = "timeline"
     scale.name = "timeline"
     scale.mode = :Ratio
     scale.continuous = true
     scale.unit = "s"
     document.scale_set << scale
+    
+    # now: start to read the file.
     
     fileType = f.gets.strip
     objectClass = f.gets.strip
@@ -71,68 +73,87 @@ class ToE::Porter::TextGridPorter
     global_max = f.gets.to_f
     f.gets # <exists>
     
-    # get the numbers of tiers in this document.
-    numberOfTiers = f.gets.to_i
+    size_spec = f.gets.strip
     
+    size_match = size_spec.match(/\d+/)
+    size_spec = size_match[0].to_i if size_match
     
-    numberOfTiers.times do |tierNumber|
-      #puts "TIER: #{tierNumber}"
+    puts size_spec
+    
+    # next line: item []: - skip
+    f.gets
+    
+    for tier_num in (1..size_spec)
       
-      tierType = f.gets.strip
-      tierName = f.gets.strip
-      tier_min = f.gets.to_f
-      tier_max = f.gets.to_f
+      # read tier item line, drop it
+      f.gets
       
-      #puts "minmax: %i, %i" % [tier_min, tier_max]
+      puts "class"
+      tierClass = f.gets.match(/"(.*)"/)[1]
+      puts "name"
+      tierName  = f.gets.match(/"(.*)"/)[1] 
+      puts "xmin"
+      tierXmin = f.gets.match(/(\d+(\.\d+)?)/)[1].to_f 
+      puts "xmax"
+      tierXmax = f.gets.match(/(\d+(\.\d+)?)/)[1].to_f 
+      puts "size"
+      tierSize = f.gets.match(/size\s*=\s*(\d+)/)[1].to_i 
       
-      #puts "tier name: %s" % tierName
+      [tierClass, tierName, tierXmin, tierXmax, tierSize].each do |k|
+        puts " - %s" % k
+      end
       
-      #puts "document: %s" % document.to_s
-       
-      # create layer object from that tier
-      #puts "layer constructor before"
       layer = Layer.new(document)
-      #puts "layer constructor done"
-      
       #puts "strip quotes"
-      layer.name = ToE::Util::strip_quotes(tierName)
-      
+      layer.name = tierName
       #puts "to xml id"
       layer.id = ToE::Util::to_xml_id(tierName)
       
-      #puts "layer: %s" % layer.name
-      
-      numberOfAnnotations = f.gets.to_i
-      
-      numberOfAnnotations.times do |annotationNumber|
+      for anno_num in (1..tierSize)
         
-        anno_min = f.gets.to_f
-        anno_max = f.gets.to_f
-        anno_val = f.gets.strip.gsub(/^"/, "").gsub(/"$/, "")
+        # read :
         
-        #puts "  #{anno_val} [#{anno_min}--#{anno_max}]"
+        # intervals [n]:
+        # xmin = \dd
+        # xmax  = \dd
+        # text = "s"
+         
+        f.gets
         
-        event = Event.new #(document)
-        interval = IntervalLink.new
-        interval.min = anno_min
-        interval.max = anno_max
-        interval.target = scale
-        event.links << interval
-        layerlink = LayerLink.new
-        layerlink.target = layer
-        event.links << layerlink
-        event.data = anno_val
+        annoMin = f.gets.match(/(\d+(\.\d+)?)/)[1].to_f
         
-        document.event_set.add(event)
+        annoMax = f.gets.match(/(\d+(\.\d+)?)/)[1].to_f
+        
+        annoVal = f.gets.match(/"(.*)"/)[1]
+        
+        puts "%f, %f, %s" % [annoMin, annoMax, annoVal]
+        
+        if annoVal.strip != ""
+          event = Event.new #(document)
+          interval = IntervalLink.new
+          interval.min = annoMin
+          interval.max = annoMax
+          interval.target = scale
+          event.links << interval
+          layerlink = LayerLink.new
+          layerlink.target = layer
+          event.links << layerlink
+          event.data = annoVal
+          
+          document.event_set.add(event)
+        end
+        
       end
       
       document.layer_structure << layer
+      # return
       
     end
-    
+
+   
     while line = f.gets
       puts "LINE THAT WE MISSED!"
-      #puts "#{line.encoding.name} -- #{line.force_encoding('US-ASCII')}"
+      # puts "#{line.encoding.name} -- #{line.force_encoding('US-ASCII')}"
       line = line.force_encoding("UTF-8")
       if line.index("\"")!=nil
         #puts line
