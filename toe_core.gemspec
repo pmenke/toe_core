@@ -4,23 +4,23 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "toe_core"
-  s.version = "0.0.0"
+  s.name = %q{toe_core}
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Menke"]
-  s.date = "2012-03-23"
-  s.description = "This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments."
-  s.email = "pmenke@googlemail.com"
+  s.date = %q{2012-06-19}
+  s.description = %q{This is a reference implementation of the ToE (time-oriented events) data model in Ruby. ToE was designed to model multiple heterogeneous event streams resulting from linguistic and psychological experiments.}
+  s.email = %q{pmenke@googlemail.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "assets/haml/toe.xml.haml",
@@ -47,7 +47,10 @@ Gem::Specification.new do |s|
     "lib/toe/model/scale_set.rb",
     "lib/toe/model/toe_document.rb",
     "lib/toe/porter.rb",
+    "lib/toe/porter/elan_porter.rb",
+    "lib/toe/porter/rdf_porter.rb",
     "lib/toe/porter/short_text_grid_porter.rb",
+    "lib/toe/porter/text_grid_porter.rb",
     "lib/toe/porter/toe_porter.rb",
     "lib/toe/toe_cache.rb",
     "lib/toe/util.rb",
@@ -55,45 +58,58 @@ Gem::Specification.new do |s|
     "nbproject/project.properties",
     "nbproject/project.xml",
     "test/assets/CompleteToeDocument.toe",
-    "test/assets/MarshalledDocument.dat",
     "test/assets/OutputDocument.toe",
+    "test/assets/autogen_0001.toe",
     "test/assets/input.ShortTextGrid",
+    "test/assets/input.TextGrid",
+    "test/assets/input.eaf",
     "test/assets/output.toe",
+    "test/assets/outputEaf.toe",
+    "test/assets/outputTextgrid.toe",
     "test/helper.rb",
+    "test/test_elan_porters.rb",
     "test/test_generator.rb",
     "test/test_persistent_cache.rb",
     "test/test_praat_porters.rb",
-    "test/test_toe-core.rb",
+    "test/test_rdf.rb",
+    "test/test_toe_core.rb",
     "test/test_toe_porter.rb",
     "toe_core.gemspec"
   ]
-  s.homepage = "http://github.com/pmenke/toe_core"
+  s.homepage = %q{http://github.com/pmenke/toe_core}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
-  s.summary = "Ruby implementation of the ToE (time-oriented events) data model"
+  s.rubygems_version = %q{1.3.7}
+  s.summary = %q{Ruby implementation of the ToE (time-oriented events) data model}
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<libxml-ruby>, [">= 0"])
       s.add_runtime_dependency(%q<haml>, [">= 0"])
+      s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
+      s.add_runtime_dependency(%q<rdf>, [">= 0"])
       s.add_development_dependency(%q<test-unit>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
     else
       s.add_dependency(%q<libxml-ruby>, [">= 0"])
       s.add_dependency(%q<haml>, [">= 0"])
+      s.add_dependency(%q<nokogiri>, [">= 0"])
+      s.add_dependency(%q<rdf>, [">= 0"])
       s.add_dependency(%q<test-unit>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     end
   else
     s.add_dependency(%q<libxml-ruby>, [">= 0"])
     s.add_dependency(%q<haml>, [">= 0"])
+    s.add_dependency(%q<nokogiri>, [">= 0"])
+    s.add_dependency(%q<rdf>, [">= 0"])
     s.add_dependency(%q<test-unit>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
   end
 end
