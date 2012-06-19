@@ -40,6 +40,6 @@ pkg
 Gemfile.lock
 .project
 /*.directory
-/nbproject/private/
+/nbproject
 /.idea/
 test/assets/MarshalledDocument.dat
