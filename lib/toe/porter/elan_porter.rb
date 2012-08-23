@@ -85,12 +85,13 @@ class ToE::Porter::ElanPorter
             # TIME_SLOT_REF2
             
             annoVal = anno.xpath("./ANNOTATION_VALUE/text()").first.to_s
-            # puts anno.xpath("./ANNOTATION_VALUE/text()").first
+            puts anno.xpath("./ANNOTATION_VALUE/text()").first
             if annoVal!=nil && annoVal.strip != "" 
               event = Event.new #(document)
               interval = IntervalLink.new
-              interval.min = anno["TIME_SLOT_REF1"].to_f
-              interval.max = anno["TIME_SLOT_REF2"].to_f
+              # puts "  TS1: #{anno['TIME_SLOT_REF1']}"
+              interval.min = timeslots[anno["TIME_SLOT_REF1"]].to_f
+              interval.max = timeslots[anno["TIME_SLOT_REF2"]].to_f
               interval.target = scale
               event.links << interval
               layerlink = LayerLink.new
