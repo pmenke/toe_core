@@ -18,3 +18,8 @@ group :development do
   gem "jeweler", "~> 1.6.4"
   
 end
+
+group :test do 
+  gem 'cucumber'
+  gem 'rspec'  
+end
